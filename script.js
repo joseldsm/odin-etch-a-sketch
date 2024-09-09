@@ -10,5 +10,5 @@ function createGrid(gridSize) {
 }
 
 const container = document.querySelector("#container");
-createGrid(16);
+createGrid(10);
 

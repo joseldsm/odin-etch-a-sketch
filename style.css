@@ -1,15 +1,17 @@
-#container {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+body {
+    margin : 0;
 }
 
 div {
     flex-grow: 1;
     background-color: yellow;
     border: 1px solid black;
+}
+
+#container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
