@@ -1,16 +1,26 @@
 body {
     margin : 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 div {
     flex-grow: 1;
-    background-color: yellow;
+    background-color: pink;
     border: 1px solid black;
+    box-sizing: border-box;
 }
 
 #container {
-    width: 100vw;
-    height: 100vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
