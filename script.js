@@ -1,9 +1,10 @@
 function createGrid(gridSize) {
+    let squareColored = [0];
     const flexBasis = 100/gridSize;
-    console.log(flexBasis);
 
     for (let i = 0; i < (gridSize*gridSize); i++) {
         const div = document.createElement("div");
+        div.id = i;
         let j = i/gridSize;
 
         if (Number.isInteger(j) == true) {
@@ -14,8 +15,23 @@ function createGrid(gridSize) {
 
         container.appendChild(div);
         div.style.width = `${flexBasis}%`;
+
         div.addEventListener('mouseenter', (event) => {
-            div.style.backgroundColor = randomColor();
+            if (squareColored.includes(div.id)) {
+                //get current div backgroundColor
+                const backgroundColor = window.getComputedStyle(div).backgroundColor;
+                //get rgba values of the current div backgroundColor
+                const rgba = backgroundColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+\.?\d*))?\)/);
+                //store the value of the alpha (opacity) of the current div backgroundColor
+                let alpha = parseFloat(rgba[4]);
+                if (alpha < 1) {
+                    alpha += 0.1;
+                    div.style.backgroundColor = `rgba(${rgba[1]}, ${rgba[2]}, ${rgba[3]}, ${alpha})`;
+                }
+            } else {
+                div.style.backgroundColor = randomColor10();
+                squareColored.push(div.id);
+            }
         });
     }
 }
@@ -31,16 +47,16 @@ function askForGridSize() {
 
     do {
         gridSize = Number(prompt("Please enter the number of vertical and horizontal items for the grid you want (max : 60)"));
-    } while (!Number.isInteger(gridSize) || gridSize > 65);
+    } while (!Number.isInteger(gridSize) || gridSize > 65 || gridSize <= 0);
 
     return gridSize;
 }
 
-function randomColor() {
+function randomColor10() {
     let red = Math.floor(Math.random()*256);
     let green = Math.floor(Math.random()*256);
     let blue = Math.floor(Math.random()*256);
-    return `rgb(${red}, ${green}, ${blue})`;
+    return `rgb(${red}, ${green}, ${blue}, 0.1)`;
 }
 
 const container = document.querySelector("#container");
