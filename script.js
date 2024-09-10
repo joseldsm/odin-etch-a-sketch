@@ -15,7 +15,7 @@ function createGrid(gridSize) {
         container.appendChild(div);
         div.style.width = `${flexBasis}%`;
         div.addEventListener('mouseenter', (event) => {
-            div.style.backgroundColor = "red";
+            div.style.backgroundColor = randomColor();
         });
     }
 }
@@ -34,6 +34,13 @@ function askForGridSize() {
     } while (!Number.isInteger(gridSize) || gridSize > 65);
 
     return gridSize;
+}
+
+function randomColor() {
+    let red = Math.floor(Math.random()*256);
+    let green = Math.floor(Math.random()*256);
+    let blue = Math.floor(Math.random()*256);
+    return `rgb(${red}, ${green}, ${blue})`;
 }
 
 const container = document.querySelector("#container");
